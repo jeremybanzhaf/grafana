@@ -70,6 +70,12 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
+  server.use(
+    rest.get('/api/snapshot/shared-options', (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({ snapshotEnabled: true }));
+    })
+  );
+
   config.featureToggles.publicDashboards = true;
   mockDashboard = createDashboardModelFixture({
     uid: 'mockDashboardUid',
