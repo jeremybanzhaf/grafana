@@ -569,6 +569,12 @@ func (s *ServiceImpl) buildDataConnectionsNavLink(c *models.ReqContext) *navtree
 
 	baseUrl := s.cfg.AppSubURL + "/connections"
 
+	fmt.Printf("\n--------------------------------------")
+	fmt.Printf("\nhasAccess: %v", hasAccess(ac.ReqOrgAdmin, datasources.ConfigurationPageAccess))
+	fmt.Printf("\nisOrgAdmin: %v", ac.ReqOrgAdmin(c))
+	fmt.Printf("\nisGrafanaAdmin: %v", ac.ReqGrafanaAdmin(c))
+	fmt.Printf("\n--------------------------------------\n")
+
 	if hasAccess(ac.ReqOrgAdmin, datasources.ConfigurationPageAccess) {
 		// Connect data
 		children = append(children, &navtree.NavLink{
@@ -610,5 +616,6 @@ func (s *ServiceImpl) buildDataConnectionsNavLink(c *models.ReqContext) *navtree
 
 		return navLink
 	}
+
 	return nil
 }
